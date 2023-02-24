@@ -1,0 +1,45 @@
+{
+  "$id": "https://formantio.github.io/schemas/point_cloud_v1.schema.json",
+  "$schema": "https://formantio.github.io/schemas/point_cloud_v1.md",
+  "title": "Point Cloud V1",
+  "description": "A point cloud with optional support for color",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON schema for this message (should be 'formant/PointCloud')"
+    },
+    "$version": {
+      "type": "number",
+      "description": "Version of the point cloud schema (should be 1)"
+    },
+    "points": {
+      "description": "The points in the point cloud",
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "channels": {
+      "description": "Optional channels of data for each point",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "name": {
+          "description": "The channel the point cloud is from",
+          "type": "string",
+          "enum": ["rgb", "intensity", "distance"]
+        },
+        "values": {
+          "description": "The colors in the point cloud in RGBA format (optional",
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  },
+  "required": ["$schema", "$version", "points"],
+  "additionalProperties": false
+}
